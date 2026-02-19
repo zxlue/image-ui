@@ -1,5 +1,19 @@
 
 <!DOCTYPE html>
+<script>
+    // 强制所有 /admin/ 请求都发到你的 Worker
+    const API_BASE = 'https://image-ui.pages.dev';
+    
+    // 劫持 fetch 请求
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options) {
+        if (typeof url === 'string' && url.startsWith('/admin/')) {
+            url = API_BASE + url;
+        }
+        return originalFetch(url, options);
+    };
+</script>
+
 <html lang="zh-CN">
 
 <head>
@@ -13771,5 +13785,6 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
 
     </script>
 </body>
+
 
 </html>
